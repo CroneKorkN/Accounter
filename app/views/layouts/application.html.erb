@@ -21,7 +21,7 @@
       <span id="user_area">
         <% if current_user %>
           Hallo <%= current_user.email %> |
-          <%= link_to "Log Out", logout_path, remote: true %>
+          <%= link_to "Log Out", logout_path %>
         <% else %>
           <%= link_to "Einloggen", login_path, remote: true %> |
           <%= link_to "Registrieren", signup_path, remote: true %>
