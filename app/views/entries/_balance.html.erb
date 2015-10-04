@@ -1,0 +1,8 @@
+<entry class=balance>
+  <name>
+    <%= account.close_via.name if account.close_via %>
+  </name>
+  <value>
+    <%= number_to_currency account.balance %>
+  </value>
+</entry>

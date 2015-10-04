@@ -1,0 +1,9 @@
+<entry class=record>
+  <name>
+    <%= entry.record.order %>
+  </name>
+  <value>
+    <%= editable entry, :value,
+                        display_with: :number_to_currency %>
+  </value>
+</entry>

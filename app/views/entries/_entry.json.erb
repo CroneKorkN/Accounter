@@ -1,0 +1,10 @@
+{
+  "id": <%= entry.id %>,
+  "account": " <%= best_in_place(entry,
+                    :number,
+                    as: :select,
+                    collection: AccountTemplate.collection(id: :number),
+                    display: :name).gsub('"', '\"').html_safe %>",
+  "value": "<%= editable(entry, :value,
+                      display_with: :number_to_currency).gsub('\n', '\\').gsub('"', '\"').html_safe %>"
+}

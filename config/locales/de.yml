@@ -1,0 +1,9 @@
+de:
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        negative_format: "%u-%n"
+        unit: "€ "
+        separator: ","
+        delimiter: "."

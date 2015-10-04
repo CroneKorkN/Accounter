@@ -1,0 +1,102 @@
+/* accounts */
+accounts {
+  $border-color: #bbb;
+  $border-width: 0px;
+  $doubleborder-width: 3px;
+
+  display: block;
+  column-width: $column-width;
+  column-gap: $column-gap;
+  -moz-column-width: $column-width;
+  -moz-column-gap: $column-gap;
+
+  /* account */
+  & account {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    /* account header */
+    & > header {
+      text-align: center;
+      font-weight: bold;
+      padding: 4px;
+      color: black;
+    }
+
+    /* account content */
+    & > content {
+      display: flex;
+      border-top: $border-width solid $border-color;
+    }
+
+    /* account sum */
+    & > sum {
+      display: flex;
+      border-top: $doubleborder-width double $border-color;
+    }
+
+    /* account sides */
+    & > * > side {
+      & {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+      }
+      &.debit {
+
+        & entry.initial, & entry.record, & entry.closing, & entry.balance {
+          border-style: solid;
+          border-width: 0 0 0 $marker-width;
+        }
+      }
+      &.credit {
+        border-left: $border-width solid $border-color;
+
+        & entry.initial, & entry.record, & entry.closing, & entry.balance {
+          border-style: solid;
+          border-width: 0 $marker-width 0 0;
+        }
+      }
+
+      /* account records */
+      & > entry {
+        display: flex;
+        padding: 4px 8px;
+
+        & > actions {
+          display: none;
+        }
+
+        &.initial {
+          border-color: rgba($initial-r, $initial-g, $initial-b, 1);
+          background-color: rgba($initial-r, $initial-g, $initial-b, $opacity);
+        }
+        &.record {
+          border-color: rgba($record-r, $record-g, $record-b, 1);
+          background-color: rgba($record-r, $record-g, $record-b, $opacity);
+        }
+        &.closing {
+          border-color: rgba($closing-r, $closing-g, $closing-b, 1);
+          background-color: rgba($closing-r, $closing-g, $closing-b, $opacity);
+        }
+        &.balance {
+          border-color: rgba($balance-r, $balance-g, $balance-b, 1);
+          background-color: rgba($balance-r, $balance-g, $balance-b, $opacity);
+        }
+        & > name {
+          flex-grow: 1;
+        }
+        & > value {
+          display: flex;
+          flex-grow: 1;
+          justify-content: flex-end;
+          white-space: nowrap;
+        }
+        &:not(:first-of-type).balance {
+          border-top: 1px solid $border-color;
+        }
+      }
+    }
+  }
+}

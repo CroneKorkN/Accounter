@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Task account:</strong>
+  <%= @entry.task_account %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @entry.value %>
+</p>
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %>

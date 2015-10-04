@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  close_via_id: 1
+  has_initial: false
+  order: 1
+
+two:
+  name: MyString
+  close_via_id: 1
+  has_initial: false
+  order: 1

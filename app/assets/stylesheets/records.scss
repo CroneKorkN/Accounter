@@ -1,0 +1,107 @@
+/* records */
+records {
+  display: block;
+  column-width: $column-width;
+  column-gap: $column-gap;
+  -moz-column-width: $column-width;
+  -moz-column-gap: $column-gap;
+
+  /* record */
+  & > record {
+    display: flex;
+    flex-grow: 1;
+    margin-bottom: 10px;
+    border-left: $marker-width solid rgba($record-r, $record-g, $record-b, 1);
+    background: #fff;
+    position: relative;
+
+    &.ui-selected {
+      & > actions {
+        visibility: visible;
+      }
+      & > debit, & > credit {
+        & actions {
+          visibility: visible;
+          z-index: 99;
+        }
+      }
+    }
+    & > :not(actions) {
+      padding: 4px 8px;
+      background-color: rgba($record-r, $record-g, $record-b, $opacity);
+    }
+    & > order {
+      display: flex;
+      justify-content: left;
+      align-items: top;
+      width: 7%;
+      background-color: rgba($record-r, $record-g, $record-b, $opacity*2);
+    }
+    & > actions {
+      visibility: hidden;
+      position: absolute;
+      right: 0;
+      top: -30px;
+      & > action {
+        height: 28px;
+      }
+    }
+    & action {
+      display: flex;
+      justify-content: center;
+      background: gray;
+      color: white;
+      width: 28px;
+      text-align: center;
+      font-weight: bold;
+      border: 1px solid rgba(0,0,0,1);
+      & > a {
+        color: white;
+      }
+    }
+    & > debit, & > credit {
+      display: flex;
+      flex-direction: column;
+      width: 44%;
+      position: relative;
+
+      & > actions {
+        visibility: hidden;
+        position: absolute;
+        left: 50%;
+        bottom: -20px;
+      }
+      /* record accounts */
+      & > entry {
+        display: flex;
+        position: relative;
+        line-height: 1.5em;
+
+        & > name, & > value {
+          display: flex;
+          flex-grow: 1;
+        }
+        & > name {
+          justify-content: flex-start;
+        }
+        & > value {
+          justify-content: flex-end;
+          white-space: nowrap;
+        }
+        & > actions {
+          visibility: hidden;
+          position: absolute;
+          left: -30px;
+          top: 0;
+          height: 100%;
+        }
+      }
+    }
+    & > seperator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 5%;
+    }
+  }
+}

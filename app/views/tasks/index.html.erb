@@ -1,0 +1,7 @@
+<% content_for "headline" do %>
+  tasks <%= link_to '+', new_task_path, remote: true %>
+<% end %>
+
+<% @tasks.each do |task| %>
+  <h2><%= link_to task.name.html_safe, task %></h2>
+<% end %>

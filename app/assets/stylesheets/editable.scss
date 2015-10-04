@@ -1,0 +1,15 @@
+[contenteditable=true][data-editable-datatype=string] {
+  white-space: nowrap;
+  
+  & br {
+    display: none;
+  }
+  & * {
+    display: inline;
+    white-space: nowrap;
+  }
+}
+
+[data-editable-invalid=true] {
+  color: red;
+}

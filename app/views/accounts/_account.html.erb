@@ -1,0 +1,69 @@
+<account data-account_id="<%= account.id %>"
+         data-task_id="<%= account.task_id %>"
+         data-order="<%= account.account_template.order %>"
+         id="account_<%= account.number %>">
+  <header>
+    <%= account.number %> <%= account.name %>
+  </header>
+  <content>
+    <side class=debit>
+
+      <!-- initial -->
+      <%= render "entries/initial", account: account if account.has_initial and account.initial > 0 %>
+
+      <!-- debit -->
+      <% account.entries.debit.each do |entry| %>
+        <%= render "accounts/entry", entry: entry %>
+      <% end %>
+
+      <!-- closing -->
+      <% account.closing_here.each do |account| %>
+        <%= render "entries/closing",
+                   account: account if account.balance >= 0 %>
+      <% end %>
+
+      <!-- balance -->
+      <%= render "entries/balance",
+                  account: account if account.balance < 0 %>
+
+    </side>
+    <side class=credit>
+
+      <!-- initial -->
+      <%= render "entries/initial",
+                 account: account if account.has_initial and account.initial < 0 %>
+
+      <!-- credit -->
+      <% account.entries.credit.each do |entry| %>
+        <%= render "accounts/entry", entry: entry %>
+      <% end %>
+
+      <!-- closing -->
+      <% account.closing_here.each do |account| %>
+        <%= render "entries/closing",
+                   account: account if account.balance < 0 %>
+      <% end %>
+
+      <!-- balance -->
+      <%= render "entries/balance",
+                  account: account if account.balance >= 0 %>
+
+    </side>
+  </content>
+  <sum>
+    <side class=debit>
+      <entry>
+        <value>
+          <%= number_to_currency account.sum %>
+        </value>
+      </entry>
+    </side>
+    <side class=credit>
+      <entry>
+        <value>
+          <%= number_to_currency account.sum %>
+        </value>
+      </entry>
+    </side>
+  </sum>
+</account>

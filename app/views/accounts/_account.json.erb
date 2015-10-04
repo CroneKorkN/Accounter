@@ -1,0 +1,54 @@
+{
+  "id": "<%= account.id %>",
+  "number": "<%= account.number %>",
+  "name": "<%= account.name %>",
+  "order": "<%= account.account_template.order %>",
+  "task_id": "<%= account.task_id %>",
+  "initial": "<%= editable(account, :initial,
+                       display_with: :number_to_currency).gsub('"', '\"').html_safe %>",
+  "sum": "<%= number_to_currency account.sum %>",
+  "debit": {
+    "initial": "<%= "true" if account.initial > 0 %>",
+    "balance": "<%= "true" if account.balance < 0 %>",
+    "entries": [
+      <% account.entries.debit.each_with_index do |entry, i| %>
+        <%= "," if i > 0 %>
+        {"order": "<%= entry.record.order %>", "value":
+         "<%= editable(entry, :value,
+                              display_with: :number_to_currency).gsub('"', '\"').html_safe %>"
+        }
+      <% end %>
+    ],
+    "closing": [
+      <% account.closing_here.each_with_index do |closing_here, i| %>
+        <% next if closing_here.balance <= 0 %>
+        <%= "," if i > 0 %>
+        {"account_name": "<%= closing_here.name %>", "value": "<%= number_to_currency closing_here.balance %>"}
+      <% end %>
+    ]
+  },
+  "credit": {
+    "initial": "<%= "true" if account.initial < 0 %>",
+    "balance": "<%= "true" if account.balance >= 0 %>",
+    "entries": [
+      <% account.entries.credit.each_with_index do |entry, i| %>
+        <%= "," if i > 0 %>
+        {"order": "<%= entry.record.order %>", "value":
+        "<%= editable(entry, :value,
+                             display_with: :number_to_currency).gsub('"', '\"').html_safe %>"
+        }
+      <% end %>
+    ],
+    "closing": [
+      <% account.closing_here.each_with_index do |closing_here, i| %>
+        <% next if closing_here.balance > 0 %>
+        <%= "," if i > 0 %>
+        {"account_name": "<%= closing_here.name %>", "value": "<%= number_to_currency closing_here.balance %>"}
+      <% end %>
+    ]
+  },
+  "balance": {
+    "account_name": "<%= account.close_via.name if account.close_via %>",
+    "value": "<%= number_to_currency account.balance.abs %>"
+  }
+}

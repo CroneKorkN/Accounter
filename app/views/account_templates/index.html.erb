@@ -1,0 +1,35 @@
+<h2>Kontenvorlagen verwalten <%= link_to '+', new_account_template_path, remote: true %></h2>
+
+<account_templates>
+  <% @account_templates.each do |account_template| %>
+    <account_template id=account_<%= account_template.id %>>
+      <order>
+         =
+      </order>
+      <number class=id>
+        <%= editable account_template, :number %>
+      </number>
+      <name>
+        <%= editable account_template, :name %>
+      </name>
+      <close_via>
+        <%= best_in_place account_template,
+                          :close_via_number,
+                          as: :select,
+                          collection: AccountTemplate.collection(id: :number, with_empty: true),
+                          display: :name %>
+      </close_via>
+      <has_initial>
+        <%= best_in_place account_template, :has_initial, as: :checkbox %>
+      </has_initial>
+      <delete>
+        <%= link_to 'x', account_template, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </delete>
+    </account_template>
+  <% end %>
+</account_templates>
+
+<script>
+  accounts_sortable();
+  $("account_templates [data-editable]").editable();
+</script>

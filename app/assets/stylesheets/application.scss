@@ -1,0 +1,27 @@
+/*
+ *= require_self
+ */
+
+/* vars */
+$record-r: 255;
+$record-g: 153;
+$record-b: 0;
+$initial-r: 102;
+$initial-g: 204;
+$initial-b: 255;
+$closing-r: 204;
+$closing-g: 0;
+$closing-b: 255;
+$balance-r: 51;
+$balance-g: 153;
+$balance-b: 102;
+$opacity: 0.07;
+
+
+$column-width: 480px;
+$column-gap: 32px;
+$marker-width: 4px;
+$element-radius: 5px;
+
+/* inludes */
+@import "*";

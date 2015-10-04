@@ -1,0 +1,16 @@
+{
+  "id": <%= record.id %>,
+  "order": <%= record.order %>,
+  "debits": [
+    <% record.entries.debit.each_with_index do |entry, i| %>
+      <%= "," if i > 0 %>
+      <%= render entry %>
+    <% end %>
+  ],
+  "credits": [
+    <% record.entries.credit.each_with_index do |entry, i| %>
+    <%= "," if i > 0 %>
+    <%= render entry %>
+  <% end %>
+  ]
+}

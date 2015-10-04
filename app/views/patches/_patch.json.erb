@@ -1,0 +1,18 @@
+{
+  "type": "<%= patch.patchable_type %>",
+  "id": "<%= patch.patchable_id %>",
+  "method": "<%= patch.method %>",
+  "user": {
+    "id": "<%= patch.user_id if patch.user_id %>",
+    "name": "<%= patch.user.name if patch.user_id %>"
+  }
+  <%= ",\"data\":".html_safe if [:create, :update].include? patch.method %>
+  <%=
+    if [:create, :update].include? patch.method
+      case patch.patchable_type
+        when "Account" then render "accounts/account", account: patch.patchable
+        when "Record" then render "records/record", record: patch.patchable
+      end
+    end
+%>
+}

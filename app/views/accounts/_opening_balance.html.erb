@@ -1,0 +1,53 @@
+<account class=opening_balance>
+  <header>
+    EB
+  </header>
+  <content>
+    <side class=debit>
+      <% opening_balance.debit
+              .each do |account| %>
+        <entry class=initial>
+          <name>
+            <%= account.name %>
+          </name>
+          <value>
+            <%= editable account,
+                        :initial,
+                        display_with: :number_to_currency %>
+          </value>
+        </entry>
+      <% end %>
+    </side>
+    <side class=credit>
+      <% opening_balance.credit
+              .each do |account| %>
+        <entry class=initial>
+          <name>
+            <%= account.name %>
+          </name>
+          <value>
+            <%= editable account,
+                         :initial,
+                         display_with: :number_to_currency %>
+          </value>
+        </entry>
+      <% end %>
+    </side>
+  </content>
+  <sum>
+    <side class=debit>
+      <entry class=sum>
+        <value>
+          <%= number_to_currency opening_balance.debit_sum %>
+        </value>
+      </entry>
+    </side>
+    <side class=credit>
+      <entry class=sum>
+        <value>
+          <%= number_to_currency opening_balance.credit_sum %>
+        </value>
+      </entry>
+    </side>
+  </sum>
+</account>

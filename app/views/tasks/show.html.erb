@@ -1,0 +1,145 @@
+<% content_for "headline" do %>
+  <%= editable @task, :name %>
+<% end %>
+
+<% editable @task, :name %>
+
+<h2 data-unselect>
+  Buchungssätze
+  <span class=add data-add_record data-task_id=<%= @task.id %>>
+    +
+  </span>
+</h2>
+
+<records>
+  <%= render @task.records %>
+</records>
+
+<h2>Konten</h2>
+<accounts>
+  <%= render @task.opening_balance if @task.show_opening_balance? %>
+  <%= render @task.accounts %>
+</accounts>
+
+<!-- -->
+
+<script id="record-template" type="text/x-handlebars-template">
+  <record id=record_{{id}}>
+    <order>{{order}}</order>
+    <debit>
+      {{#each debits}}
+        <entry class=record>
+          <name>{{{account}}}</name>
+          <value>{{{value}}}</value>
+          <actions><action data-entry_remove=""
+                    data-entry_id={{id}}>-</action></actions>
+        </entry>
+      {{/each}}
+      <actions><action data-record_add_entry=""
+                       data-record_id={{id}}
+                       data-debit_not_credit=true>+</action></actions>
+    </debit>
+    <seperator>
+      an
+    </seperator>
+    <credit>
+      {{#each credits}}
+        <entry class=record>
+          <name>{{{account}}}</name>
+          <value>{{{value}}}</value>
+          <actions><action data-entry_remove=""
+                    data-entry_id={{id}}>-</action></actions>
+        </entry>
+      {{/each}}
+      <actions><action data-record_add_entry=""
+                       data-record_id={{id}}
+                       data-debit_not_credit=false>+</action></actions>
+    </credit>
+    <actions><action data-remove_record=""
+                data-record_id={{id}}>x</action></actions>
+  </record>
+</script>
+
+
+<script id="account-template" type="text/x-handlebars-template">
+  <account data-account_id="{{id}}"
+           data-task_id="{{task_id}}"
+           data-order="{{order}}"
+           id="account_{{number}}">
+    <header>
+      {{number}} {{name}}
+    </header>
+    <content>
+      <side class=debit>
+
+        {{#if debit.initial}}
+          <entry class=initial>
+            <name>AB</name>
+            <value>{{{initial}}}</value>
+          </entry>
+        {{/if}}
+
+        {{#each debit.entries}}
+          <entry class=record>
+            <name>{{order}}</name>
+            <value>{{{value}}}</value>
+          </entry>
+        {{/each}}
+
+        {{#each debit.closing}}
+          <entry class=closing>
+            <name>{{account_name}}</name>
+            <value>{{value}}</value>
+          </entry>
+        {{/each}}
+
+        {{#if debit.balance}}
+        <entry class=balance>
+          <name>{{balance.account_name}}</name>
+          <value>{{balance.value}}</value>
+        </entry>
+        {{/if}}
+
+      </side>
+      <side class=credit>
+
+        {{#if credit.initial}}
+          <entry class=initial>
+            <name>AB</name>
+            <value>{{{initial}}}</value>
+          </entry>
+        {{/if}}
+
+        {{#each credit.entries}}
+          <entry class=record>
+            <name>{{order}}</name>
+            <value>{{{value}}}</value>
+          </entry>
+        {{/each}}
+
+        {{#each credit.closing}}
+          <entry class=closing>
+            <name>{{account_name}}</name>
+            <value>{{value}}</value>
+          </entry>
+        {{/each}}
+
+        {{#if credit.balance}}
+          <entry class=balance>
+            <name>{{balance.account_name}}</name>
+            <value>{{balance.value}}</value>
+          </entry>
+        {{/if}}
+
+      </side>
+    </content>
+    <sum>
+      <side class=debit>
+        <entry><value>{{sum}}</value></entry>
+      </side>
+      <side class=credit>
+        <entry><value>{{sum}}</value></entry>
+      </side>
+    </sum>
+  </account>
+</script>

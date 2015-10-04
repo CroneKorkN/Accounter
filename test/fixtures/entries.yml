@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task_account_id: 
+  value: 9.99
+
+two:
+  task_account_id: 
+  value: 9.99

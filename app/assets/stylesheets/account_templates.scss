@@ -1,0 +1,13 @@
+account_templates {
+  display: table;
+  flex-direction: column;
+
+  & > account_template {
+    display: table-row;
+
+    & > * {
+      display: table-cell;
+      padding: 2px 8px;
+    }
+  }
+}

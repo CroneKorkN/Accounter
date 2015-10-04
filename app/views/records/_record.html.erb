@@ -1,0 +1,34 @@
+<record id="record_<%= record.id %>" data-order="<%= record.order %>">
+  <order>
+    <%= record.order || 0 %>
+  </order>
+  <debit>
+    <%= render record.entries.debit %>
+    <actions>
+      <action data-record_add_entry=""
+              data-record_id="<%= record.id %>"
+              data-debit_not_credit=true>
+        +
+      </action>
+    </actions>
+  </debit>
+  <seperator>
+    an
+  </seperator>
+  <credit>
+    <%= render record.entries.credit %>
+    <actions>
+      <action data-record_add_entry=""
+              data-record_id="<%= record.id %>"
+              data-debit_not_credit=false>
+        +
+      </action>
+    </actions>
+  </credit>
+  <actions>
+      <action data-remove_record=""
+              data-record_id="<%= record.id %>">
+        x
+      </action>
+  </actions>
+</record>

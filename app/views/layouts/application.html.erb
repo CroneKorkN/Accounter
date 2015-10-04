@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vcu</title>
+  <meta name="viewport" content="width=320, initial-scale=1" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <%= render "layouts/modal" %>
+
+  <page>
+    <h1><%= link_to "CKNs VCU", root_path %> <%= "&bull;".html_safe if yield %> <%= yield "headline" %></h1>
+
+    <p id="notice"><%= notice %></p>
+
+    <%= yield %>
+    <footer>
+      <span id="user_area">
+        <% if current_user %>
+          Hallo <%= current_user.email %> |
+          <%= link_to "Log Out", logout_path, remote: true %>
+        <% else %>
+          <%= link_to "Einloggen", login_path, remote: true %> |
+          <%= link_to "Registrieren", signup_path, remote: true %>
+        <% end %>
+      </span>
+      &bull; <%= link_to "Kontenvorlagen", account_templates_path, remote: true %>
+      &bull; &copy;2015 Martin Wiegand
+    </footer>
+  </page>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<entry class=record>
+  <name>
+    <%= best_in_place entry,
+                      :number,
+                      as: :select, 
+                      collection: AccountTemplate.collection(id: :number),
+                      display: :name %>
+  </name>
+  <value>
+    <%= editable entry, :value,
+                        display_with: :number_to_currency %>
+  </value>
+  <actions>
+    <action data-entry_remove=""
+            data-entry_id=<%= entry.id %>>
+      -
+    </action>
+  </actions>
+</entry>
