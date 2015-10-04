@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702114252) do
+ActiveRecord::Schema.define(version: 20151004223143) do
 
   create_table "account_templates", primary_key: "number", force: :cascade do |t|
     t.string   "name",             limit: 255, default: ""
     t.string   "close_via_number", limit: 255
-    t.boolean  "has_initial",      limit: 1,   default: false
+    t.boolean  "has_initial",                  default: false
     t.integer  "order",            limit: 4,   default: 0
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150702114252) do
     t.decimal  "initial",                precision: 15, scale: 2, default: 0.0
     t.datetime "created_at",                                                      null: false
     t.datetime "updated_at",                                                      null: false
-    t.boolean  "show",       limit: 1,                            default: false
+    t.boolean  "show",                                            default: false
   end
 
   add_index "accounts", ["number"], name: "index_accounts_on_number", using: :btree
@@ -45,13 +45,26 @@ ActiveRecord::Schema.define(version: 20150702114252) do
     t.integer  "record_id",        limit: 4
     t.integer  "account_id",       limit: 4
     t.decimal  "value",                      precision: 15, scale: 2, default: 0.0
-    t.boolean  "debit_not_credit", limit: 1,                          default: true
+    t.boolean  "debit_not_credit",                                    default: true
     t.datetime "created_at",                                                         null: false
     t.datetime "updated_at",                                                         null: false
   end
 
   add_index "entries", ["account_id"], name: "index_entries_on_account_id", using: :btree
   add_index "entries", ["record_id"], name: "index_entries_on_record_id", using: :btree
+
+  create_table "members", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
+    t.string   "password_digest", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "members", ["email"], name: "index_members_on_email", using: :btree
+  add_index "members", ["name"], name: "index_members_on_name", using: :btree
+  add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
 
   create_table "observers", force: :cascade do |t|
     t.string   "session_id", limit: 255
@@ -96,16 +109,20 @@ ActiveRecord::Schema.define(version: 20150702114252) do
     t.string   "password_digest", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "current_task_id", limit: 4
   end
 
+  add_index "users", ["current_task_id"], name: "index_users_on_current_task_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
 
   add_foreign_key "accounts", "tasks"
   add_foreign_key "entries", "accounts"
   add_foreign_key "entries", "records"
+  add_foreign_key "members", "users"
   add_foreign_key "observers", "tasks"
   add_foreign_key "patches", "observers"
   add_foreign_key "patches", "users"
   add_foreign_key "records", "tasks"
+  add_foreign_key "users", "tasks", column: "current_task_id"
 end
