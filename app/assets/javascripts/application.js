@@ -20,6 +20,7 @@ var app = function() {
   accounts_sortable();
   modal.initialize();
   observe();
+  header();
 
   $('#test').typing({
       start: function (event, $elem) {

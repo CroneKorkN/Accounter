@@ -13,13 +13,13 @@
 
   <app-page>
     <app-header>
-      <main-menu class=menu>
+      <main-menu class=menu data-menu-expanded=false>
         <h1>☰ <%= @task.name %></h1>
         <menu-frame>
           <%= link_to "Kontenvorlagen", account_templates_path, remote: true %>
         </menu-frame>
       </main-menu>
-      <user-menu class=menu>
+      <user-menu class=menu data-menu-expanded=false>
         <% if current_user.member? %>
           Hallo, <%= current_user.name %>!
         <% else %>

@@ -1,16 +1,24 @@
 app-header {
   display: flex;
   align-items: baseline;
+  margin-bottom: 20px;
   
   .menu {
     flex-grow: 1;
-    width: 50%;
     font-size: 2em;
     position: relative;
     
     menu-frame {
       visibility: hidden;
       position: absolute;
+      top: 100%;
+      right: 0;
+    }
+  }
+  
+  .menu[data-menu-expanded="1"] {
+    menu-frame {
+      visibility: visible;
     }
   }
 
