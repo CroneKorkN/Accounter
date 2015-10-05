@@ -11,26 +11,38 @@
 
   <%= render "layouts/modal" %>
 
-  <page>
-    <h1><%= link_to "CKNs VCU", root_path %> <%= "&bull;".html_safe if yield %> <%= yield "headline" %></h1>
-
-    <p id="notice"><%= notice %></p>
-
-    <%= yield %>
-    <footer>
-      <span id="user_area">
+  <app-page>
+    <app-header>
+      <main-menu class=menu>
+        <h1>☰ <%= @task.name %></h1>
+        <menu-frame>
+          <%= link_to "Kontenvorlagen", account_templates_path, remote: true %>
+        </menu-frame>
+      </main-menu>
+      <user-menu class=menu>
         <% if current_user.member? %>
-          Hallo <%= current_user.email %> |
-          <%= link_to "Log Out", logout_path, remote: true %>
+          Hallo, <%= current_user.name %>!
         <% else %>
-          <%= link_to "Einloggen", login_path, remote: true %> |
-          <%= link_to "Registrieren", signup_path, remote: true %>
+          Hallo, Gast!
         <% end %>
-      </span>
-      &bull; <%= link_to "Kontenvorlagen", account_templates_path, remote: true %>
-      &bull; &copy;2015 Martin Wiegand
-    </footer>
-  </page>
+        <menu-frame>
+          <% if current_user.member? %>
+            <%= link_to "Log Out", logout_path %>
+          <% else %>
+            <%= link_to "Einloggen", login_path, remote: true %> |
+            <%= link_to "Registrieren", signup_path, remote: true %>
+          <% end %>
+        </menu-frame>
+      </user-menu>
+    </app-header>
+
+    <app-notice><%= notice %></app-notice>
+    <%= yield %>
+    
+    <app-footer>
+      &copy;2015 Martin Wiegand
+    </app-footer>
+  </app-page>
 
 </body>
 </html>

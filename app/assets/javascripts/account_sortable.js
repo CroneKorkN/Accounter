@@ -1,9 +1,9 @@
 function accounts_sortable() {
-  $("account_templates").sortable({
+  $("account-templates").sortable({
     handle: "order",
     delay: 150,
     update: function (event, ui) {
-      var data = $("account_templates").sortable('serialize');
+      var data = $("account-templates").sortable('serialize');
 
       // POST to server using $.post or $.ajax
       $.ajax({

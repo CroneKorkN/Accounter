@@ -12,21 +12,15 @@ body {
   line-height: 22px;
 }
 
-page {
+app-page {
   display: block;
   margin: auto;
   padding: 20px;
 }
 
-footer {
+app-footer {
   display: block;
   margin-top: 32px;
-}
-
-h1 {
-  margin: 0;
-  padding-bottom: 20px;
-  line-height: 2em;
 }
 
 .ui-sortable-helper {

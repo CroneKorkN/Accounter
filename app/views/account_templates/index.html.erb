@@ -1,8 +1,8 @@
 <h2>Kontenvorlagen verwalten <%= link_to '+', new_account_template_path, remote: true %></h2>
 
-<account_templates>
+<account-templates>
   <% @account_templates.each do |account_template| %>
-    <account_template id=account_<%= account_template.id %>>
+    <account-template id=account_<%= account_template.id %>>
       <order>
          =
       </order>
@@ -19,15 +19,15 @@
                           collection: AccountTemplate.collection(id: :number, with_empty: true),
                           display: :name %>
       </close_via>
-      <has_initial>
+      <has-initial>
         <%= best_in_place account_template, :has_initial, as: :checkbox %>
-      </has_initial>
+      </has-initial>
       <delete>
         <%= link_to 'x', account_template, method: :delete, data: { confirm: 'Are you sure?' } %>
       </delete>
-    </account_template>
+    </account-template>
   <% end %>
-</account_templates>
+</account-templates>
 
 <script>
   accounts_sortable();
