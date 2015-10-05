@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
     get "/accounts/:account_number", to: "accounts#show_by_number"
   end
-  root to: "tasks#index"
+  root to: "tasks#show"
 
   get "/observe", to: "observers#observe"
   # gem

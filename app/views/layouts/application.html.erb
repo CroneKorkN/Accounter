@@ -19,7 +19,7 @@
     <%= yield %>
     <footer>
       <span id="user_area">
-        <% if current_user %>
+        <% if current_user.member? %>
           Hallo <%= current_user.email %> |
           <%= link_to "Log Out", logout_path, remote: true %>
         <% else %>

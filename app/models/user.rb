@@ -2,13 +2,17 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
   after_initialize :initialize_task
   has_many :tasks
+  belongs_to :current_task,
+             class_name: "Task"
   
   def member?
     true if email
   end
   
   def initialize_task
-    current_task = tasks.create.id
+    return if not self.new_record?
+    save
+    update current_task: tasks.create
   end
   
   def validations
