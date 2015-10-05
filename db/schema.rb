@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004225358) do
+ActiveRecord::Schema.define(version: 20151004225656) do
 
   create_table "account_templates", primary_key: "number", force: :cascade do |t|
     t.string   "name",             limit: 255, default: ""
@@ -101,7 +101,10 @@ ActiveRecord::Schema.define(version: 20151004225358) do
     t.string   "name",       limit: 255, default: ""
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                null: false
@@ -119,5 +122,6 @@ ActiveRecord::Schema.define(version: 20151004225358) do
   add_foreign_key "patches", "observers"
   add_foreign_key "patches", "users"
   add_foreign_key "records", "tasks"
+  add_foreign_key "tasks", "users"
   add_foreign_key "users", "tasks", column: "current_task_id"
 end
