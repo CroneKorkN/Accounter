@@ -8,6 +8,9 @@ class Task < ActiveRecord::Base
   has_many :accounts
 
   has_many :observers
+  
+  belongs_to :taskable,
+             polymorphic: true
 
   def show_opening_balance?
     accounts.opening_active.length > 0 || accounts.opening_passive.length > 0
