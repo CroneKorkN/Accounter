@@ -13,32 +13,21 @@
 
   <app-page>
     <app-header>
-      <main-menu class=menu data-menu-expanded=false>
-        <h1>☰ <%= @task.name %></h1>
-        <menu-frame>
-          <%= link_to "Kontenvorlagen", account_templates_path, remote: true %>
-        </menu-frame>
+      <main-menu class=menu data-menu-expanded="false">
+        <h1><img ig="logo" src="<%= image_path "logo.svg" %>" alt="Accounter"> <%= editable @task, :name %></h1>
+        <%= render "layouts/main_menu" %>
       </main-menu>
-      <user-menu class=menu data-menu-expanded=false>
-        <% if current_user.member? %>
-          Hallo, <%= current_user.name %>!
-        <% else %>
-          Hallo, Gast!
-        <% end %>
-        <menu-frame>
-          <% if current_user.member? %>
-            <%= link_to "Log Out", logout_path %>
-          <% else %>
-            <%= link_to "Einloggen", login_path, remote: true %> |
-            <%= link_to "Registrieren", signup_path, remote: true %>
-          <% end %>
-        </menu-frame>
+      <placeholder></placeholder>
+      <user-menu class=menu data-menu-expanded="false">
+        <%= current_user.member? ? "Hallo, #{current_user.name}" : "Hallo, Gast!"%>
+        <%= render "layouts/user_menu" %>
       </user-menu>
     </app-header>
 
-    <app-notice><%= notice %></app-notice>
-    <%= yield %>
-    
+    <app-content>
+      <%= yield %>
+    </app-content>
+  
     <app-footer>
       &copy;2015 Martin Wiegand
     </app-footer>

@@ -1,0 +1,10 @@
+<menu-frame>
+  <% if current_user.member? %>
+    <%= link_to "Log Out", logout_path %>
+    <hr>
+    <h2>Kontakte</h2>
+  <% else %>
+    <%= link_to "Einloggen", login_path, remote: true %> |
+    <%= link_to "Registrieren", signup_path, remote: true %>
+  <% end %>
+</menu-frame>

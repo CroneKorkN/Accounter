@@ -8,20 +8,26 @@ body {
   margin: 0;
   color: #333;
   font-family: helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 app-page {
   display: block;
   margin: auto;
   padding: 20px;
+  
+  app-content {
+    display: block;
+  }  
+  
+  app-footer {
+    display: block;
+    margin-top: 2rem;
+  }  
 }
 
-app-footer {
-  display: block;
-  margin-top: 32px;
-}
+
 
 .ui-sortable-helper {
   cursor: grab;

@@ -6,7 +6,7 @@ var modal = {
         console.log("skip");
         return false;
       }
-      console.log("go");
+      console.log("modal: go");
       modal.load($(this).attr("href")||$(this).attr("data-href"));
       return false;
     });

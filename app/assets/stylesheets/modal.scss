@@ -63,7 +63,9 @@ html.modal #modal {
   opacity: 1;
 }
 
-html.modal body {
+html.modal app-page {
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
 }
 
 html.modal page {

@@ -11,8 +11,8 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     Observer.find_or_create_by(session_id: session[:session_id])
-            .update(task_id:    params[:id],
-                    updated_at: DateTime.now)
+            .update(task_id: @task.id, updated_at: DateTime.now)
+    @my_tasks = current_user.tasks.where.not(id: current_user.current_task.id)
   end
 
   # GET /tasks/new
@@ -27,17 +27,8 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    task = current_user.tasks.create(name: "Neue Aufgabe")
+    render text: task.name
   end
 
   # PATCH/PUT /tasks/1
@@ -59,7 +50,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to :root }
       format.json { head :no_content }
     end
   end

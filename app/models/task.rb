@@ -5,7 +5,8 @@ class Task < ActiveRecord::Base
   has_many :entries,
            through: :records
 
-  has_many :accounts
+  has_many :accounts,
+           dependent: :destroy
 
   has_many :observers
   

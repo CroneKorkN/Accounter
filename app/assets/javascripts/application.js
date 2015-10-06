@@ -21,6 +21,7 @@ var app = function() {
   modal.initialize();
   observe();
   header();
+  tasks();
 
   $('#test').typing({
       start: function (event, $elem) {

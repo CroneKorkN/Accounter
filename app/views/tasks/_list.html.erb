@@ -1,0 +1,9 @@
+<ul>
+  <% @my_tasks.each do |task| %>
+    <li>
+      <%= link_to task.name, task %>
+      <span class="delete" data-delete-task="" data-task-id="<%= task.id %>">[x]</span>
+    </li>
+  <% end %>
+  <li><span class="add" data-add-task="">[+]</span></li>
+</ul>
