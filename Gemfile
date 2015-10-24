@@ -53,3 +53,5 @@ gem 'jquery-ui-rails'
 gem "best_in_place"
 #gem "haml-rails"
 gem 'bcrypt'
+
+gem "awesome_print"

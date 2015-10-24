@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     end
     get "/accounts/:account_number", to: "accounts#show_by_number"
   end
+  
+  get "account_tree", to: "account_templates#account_tree"
   root to: "tasks#show"
 
   get "/observe", to: "observers#observe"

@@ -1,6 +1,22 @@
 class AccountTemplatesController < ApplicationController
   before_action :set_account_template, only: [:show, :edit, :update, :destroy]
 
+  def account_tree
+    
+    @accounts = acc_iterator(AccountTemplate.find_by(number: 8010))
+    
+    render layout: "minimal"
+  end
+  
+  def acc_iterator(acc)
+    branch = {"name" =>  acc.name}
+    acc.closing_here.each do |closing_here|
+      branch["children"] ||= []
+      branch["children"] << acc_iterator(closing_here)
+    end
+    branch
+  end
+
   # GET /account_templates
   # GET /account_templates.json
   def index
