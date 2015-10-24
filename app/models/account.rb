@@ -36,6 +36,8 @@ class Account < ActiveRecord::Base
     observers.each do |observer|
       observer.notify(self, :update)
     end
+    
+    observers.notify 1, 2
   end
 
   before_destroy do

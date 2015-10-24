@@ -25,4 +25,6 @@ module ApplicationHelper
   def number_to_currency(number)
     super number.abs
   end
+  
+
 end

@@ -12,7 +12,8 @@
       case patch.patchable_type
         when "Account" then render "accounts/account", account: patch.patchable
         when "Record" then render "records/record", record: patch.patchable
+        when "OpeningBalance" then render "accounts/opening_balance", record: patch.patchable
       end
     end
-%>
+  %>
 }
