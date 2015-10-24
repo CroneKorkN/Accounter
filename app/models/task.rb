@@ -20,4 +20,8 @@ class Task < ActiveRecord::Base
   def opening_balance
     OpeningBalance.new self
   end
+  
+  def accessible_by? user
+    true if self.user_id && self.user_id == user.id
+  end
 end

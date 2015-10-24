@@ -1,5 +1,10 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_to_current_task,
+                only: [:show]
+  before_action :set_task,
+                only: [:show, :edit, :update, :destroy]
+  before_action :authorize,
+                only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -56,13 +61,23 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find_by(id: params[:id]) || current_user.current_task
-    end
+    
+  def redirect_to_current_task
+    redirect_to current_user.current_task if not params[:id]
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def task_params
-      params.require(:task).permit(:name)
-    end
+  def set_task
+    @task = Task.find_by(id: params[:id])
+    current_user.update current_task: @task
+  end
+
+  def authorize
+    flash[:notice] = "Access prohibited"
+    redirect_to current_user.tasks.last if not @task.accessible_by? current_user
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def task_params
+    params.require(:task).permit(:name)
+  end
 end
