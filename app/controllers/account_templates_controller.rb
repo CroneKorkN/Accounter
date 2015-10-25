@@ -3,13 +3,16 @@ class AccountTemplatesController < ApplicationController
 
   def account_tree
     
-    @accounts = acc_iterator(AccountTemplate.find_by(number: 8010))
-    
+    @accounts_flat
+    @accounts_tree = acc_iterator(AccountTemplate.find_by(number: 8010))
     render layout: "minimal"
   end
   
   def acc_iterator(acc)
-    branch = {"name" =>  acc.name}
+    branch = {
+      "name"  => acc.name,
+      "id"    => acc.id
+    }
     acc.closing_here.each do |closing_here|
       branch["children"] ||= []
       branch["children"] << acc_iterator(closing_here)
